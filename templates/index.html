@@ -1,22 +1,23 @@
 <!doctype html>
 <html lang="en">
-
 <head>
+
+    <!-- Webpage Title -->
+    <title>NETOON | 네가 보는 웹툰, 네툰</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Bulma CSS 링크 -->
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-    <!--나의의 CSS 링크-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -30,96 +31,212 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 
-    <script>
-        $(document).ready(function () {
-            get_posts()
-        })
-
-        function sign_out() {
-            $.removeCookie('token', {path: '/'});
-            alert('로그아웃!')
-            window.location.href = "/login"
-        }
-
-    </script>
-
-    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
 </head>
-}
-</style>
-
-
-<!--//////////////////////////////////////////////////////////////////////////////////////////-->
-
-
 <body>
-<section class="hero is-primary is-medium titlemargin">
-    <!-- 로그아웃 div -->
-    <span class="navbar-item">
-                                            <a class="button is-primary is-inverted" onclick="sign_out()">
-                                                <span>로그아웃</span>
-                                            </a>
-                                        </span>
+<div style="text-align : center;">
+    <a href="/"><img src="../static/logo.jpg" href="index.html/"></a>
 
-    <!-- 타이틀 div -->
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <p class="title">
-                NETOON
-            </p>
-            <p class="subtitle">
-                네가 보는 웹툰
-            </p>
+</div>
+<div class="wrap">
+    <section class="hero is-primary">
+        <div class="hero-body body_top">
+            <a class="navbar-item" href="/">
+                <button onclick="sign_out()" type="button" class="btn btn-light signout">로그아웃</button>
+            </a>
         </div>
-    </div>
-</section>
+    </section>
+    <div>
+        <table class="type10">
+            <!--랭킹케이블 분류-->
+            <thead>
+            <tr>
+                <th><abbr title="Position">순위</abbr></th>
+                <th><abbr title="Played">썸네일</abbr></th>
+                <th><abbr title="Played">제목</abbr></th>
+                <th><abbr title="Played">코멘트</abbr></th>
+                <th><abbr title="Drawn">코멘트개수</abbr></th>
+            </tr>
+            </thead>
 
-<!--인풋 div-->
-<div class="inputmodal">
-    <!--텍스트에리어(클릭시 모달)-->
-    <article class="media">
-        <div class="media-content">
-            <div class="field">
-                <p class="control">
-                    <input id="input-post" class="input is-rounded is-success is-medium commentplus"
-                           placeholder="웹툰의 의견을 남겨주세요"
-                           onclick='$("#modal-post").addClass("is-active")'></p>
-            </div>
-        </div>
-    </article>
-    <div class="modal" id="modal-post">
-        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
-        <div class="modal-content">
-            <div class="box">
-                <article class="media">
-                    <div class="media-content">
-                        <!--(모달) 만화선택칸-->
-                        <div class="select is-rounded choicetoon">
-                            <select id="option_toon">
-                                {% for toon_list in toon_lsts %}
-                                    {#'title' = 웹툰 제목#}
-                                    <option>{{ toon_list['title'] }}</option>
-                                {% endfor %}
-                            </select>
+            <!--렝킹테이블 값-->
+            <tbody id="rankingtble">
+            {% for top in rank %}
+            {% set toon_name = top[0] %}
+            {% set toon_count = top[1] %}
+            {% set toon_comment = top[2] %}
+            {% set toon_img_url = top[3] %}
+            <tr>
+                <th>{{ loop.index }}</th>
+                <td>
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="{{ toon_img_url }}" alt="Image">
+                            </figure>
                         </div>
-                        <!--(모달)코멘트 입력칸-->
-                        <div class="field">
-                            <p class="control">
-                                                <textarea id="textarea-post" class="textarea is-medium"
-                                                          placeholder="웹툰의 의견을 남겨주세요"></textarea>
+                    </article>
+                </td>
+                <td>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ toon_name }}</strong>
+                            </p>
+                        </div>
+                </td>
+                <td><p>{{ toon_comment }}</p></td>
+                <td>{{ toon_count }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <section class="section">
+        <article class="media">
+            <div class="media-content-special">
+                <div class="field">
+                    <p class="control">
+                        <input id="input-post" class="input is-rounded" placeholder="웹툰에 대해 작성해주세요."
+                               onclick='$("#modal-post").addClass("is-active")'></p>
+                </div>
+            </div>
+        </article>
+        <div class="modal" id="modal-post">
+            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+            <div class="modal-content">
+                <div class="cardpost">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="field">
+                                <p class="select is-rounded">
+                                    <select id="selectarea-post">
+                                        {% for title in title_list %}
+                                        <option>{{ title['title'] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </p>
+                                <p class="control">
+                                    <textarea maxlength="50" id="textarea-post" class="textarea"
+                                              placeholder="웹툰에 대해 작성해주세요."></textarea>
+                                </p>
+                            </div>
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+
+                                </div>
+                                <div class="level-right">
+                                    <div class="level-item">
+                                        <a class="button is-sparta" onclick="post()">포스팅하기</a>
+                                    </div>
+                                    <div class="level-item">
+                                        <a class="button is-sparta is-outlined"
+                                           onclick='$("#modal-post").removeClass("is-active")'>취소</a>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"
+                    onclick='$("#modal-post").removeClass("is-active")'></button>
+        </div>
+    </section>
+    <section class="section">
+        <div id="post-box" class="container">
+            <div class="cardpost">
+                <article class="media">
+                    <div class="media-left">
+                        <a class="image is-64x64" href="#">
+                            <img class="is-rounded"
+                                 src={{ url_for("static", filename="profile_pics/profile_placeholder.png") }}
+                            alt="Image">
+                        </a>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>홍길동</strong> <small>@username</small> <small>10분 전</small>
+                                <br>
+                                글을 적는 칸
                             </p>
                         </div>
                         <nav class="level is-mobile">
-                            <!--(모달) Save & Cancel 우측정렬-->
-                            <div class="level-left"></div>
-                            <!--(모달) Save & Cancel-->
-                            <div class="level-right">
-                                <div class="level-item posting_start">
-                                    <a class="button is-success" onclick="addcard()">포스팅하기</a>
-                                </div>
-                                <div class="level-item">
-                                    <a class="button is-sparta is-outlined"
-                                       onclick='$("#modal-post").removeClass("is-active")'>취소</a>
+                            <div class="level-left">
+                                <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('', 'heart')">
+                                <span class="icon is-small"><i class="fa fa-heart"
+                                                               aria-hidden="true"></i></span>&nbsp;<span
+                                        class="like-num">2.7k</span>
+                                </a>
+                            </div>
+                            <div>
+                                {# 수정버튼 모달#}
+                                <!--                                <button type="button" class="btn btn-primary" data-toggle="modal"-->
+                                <!--                                        data-target="#exampleModal"-->
+                                <!--                                        data-whatever="@mdo">수정-->
+                                <!--                                </button>-->
+                                <!--                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"-->
+                                <!--                                     aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                                <!--                                    <div class="modal-dialog" role="document">-->
+                                <!--                                        <div class="modal-content">-->
+                                <!--                                            <div class="modal-header">-->
+                                <!--                                                <h5 class="modal-title" id="exampleModalLabel">수정하기</h5>-->
+                                <!--                                                <button type="button" class="close" data-dismiss="modal"-->
+                                <!--                                                        aria-label="Close">-->
+                                <!--                                                    <span aria-hidden="true">&times;</span>-->
+                                <!--                                                </button>-->
+                                <!--                                            </div>-->
+                                <!--                                            {# 수정하기 텍스트박스#}-->
+                                <!--                                            <div class="field">-->
+                                <!--                                                <p class="select is-rounded">-->
+                                <!--                                                    <select id="modify-selectarea-post">-->
+                                <!--                                                        {% for title in title_list %}-->
+                                <!--                                                        <option>{{ title['title'] }}</option>-->
+                                <!--                                                        {% endfor %}-->
+                                <!--                                                    </select>-->
+                                <!--                                                </p>-->
+                                <!--                                                <p class="control">-->
+                                <!--                                                <textarea id="modify-textarea-post" class="textarea"-->
+                                <!--                                                          placeholder="웹툰에 대해 작성해주세요."></textarea>-->
+                                <!--                                                </p>-->
+                                <!--                                            </div>-->
+                                <!--                                            <div class="modal-footer">-->
+                                <!--                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소-->
+                                <!--                                                </button>-->
+                                <!--                                                <button type="button" class="btn btn-primary" onclick="update_post()">-->
+                                <!--                                                    수정완료-->
+                                <!--                                                </button>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                {#삭제버튼 모달#}
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                    삭제
+                                </button>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                정말로 삭제하시겠습니까?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소
+                                                </button>
+                                                <button type="button" class="btn btn-primary" onclick="delete_post()">
+                                                    삭제하기
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </nav>
@@ -127,83 +244,7 @@
                 </article>
             </div>
         </div>
-        <button class="modal-close is-large" aria-label="close"
-                onclick='$("#modal-post").removeClass("is-active")'></button>
-    </div>
+    </section>
 </div>
-
-
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-<!--랭킹테이블-->
-<table class="table">
-    <!--랭킹케이블 분류-->
-    <thead>
-    <tr>
-        <th><abbr title="Position">순위</abbr></th>
-        <th><abbr title="Played">이름</abbr></th>
-        <th><abbr title="Drawn">코멘트수</abbr></th>
-    </tr>
-    </thead>
-
-
-    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <!--카드 컬럼스-->
-    <div class="card-columns" id="post-box">
-        <!--만화 코멘트 카드-->
-        <div class="card">
-            <div class="box">
-                <article class="media">
-                    <div class="media-left">
-                        <!--(카드) 웹툰 대표 이미지-->
-                        <figure class="image is-64x64">
-                            <img src="{{ toon_img_url }}" alt="Image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <!--(카드) 웹툰 정보-->
-                        <div class="content">
-                            <p>
-                                <strong>{{ toon_name }}</strong> <small>{{ tonn_writer }}</small>
-                                <br>
-                                {{ toon_synopsis }}
-                            </p>
-                        </div>
-                    </div>
-                </article>
-                <!--카드 수정 및 삭제 구간-->
-                <footer class="card-footer card_del">
-                    {#                                <a href="#" onclick='$("#modal-edit").addClass("is-active")'> class="card-footer-item has-text-info">#}
-                    {#                                    수정#}
-                    {#                                    <span class="icon">#}
-                    {#                                          <i class="fas fa-thumbs-up"></i>#}
-                    {#                                    </span>#}
-                    {#                                </a>#}
-                    <a href="#" onclick='$("#modal-edit").addClass("is-active")'>
-                        class="card-footer-item has-text-info">
-                        수정
-                        <span class="icon">
-                                              <i class="fas fa-thumbs-up"></i>
-                                        </span>
-                    </a>
-                    <a href="#" onclick="deleteStar('{{ user_id }}')" class="card-footer-item has-text-danger">
-                        삭제
-                        <span class="icon">
-                                          <i class="fas fa-ban"></i>
-                                    </span>
-                    </a>
-                </footer>
-            </div>
-        </div>
-    </div>
-
 </body>
-
 </html>
-
-
-
-
-
-

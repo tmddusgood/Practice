@@ -5,7 +5,37 @@
     min-height: 100vh;
 }
 
-.box {
+.media-content-special{
+    min-width: 80vh;
+    max-width: 80vh;
+    margin: auto;
+}
+
+.tr, td{
+    word-break: normal;
+    max-width: 20rem;
+    padding: 1rem;
+}
+.hero-body{
+    background-color: white;
+}
+
+.hero-body body-top{
+    width: 20vh;
+    margin: auto;
+}
+
+.type10{
+    margin: auto;
+    text-align: center;
+}
+
+.navbar-item{
+    float: right
+}
+
+.box-special {
+    background-color: white;
     min-width: 40vh;
     max-width: 60vh;
     height: 100vh;
@@ -13,9 +43,9 @@
     padding-top: 30vh;
     padding-left: 5rem;
     padding-right: 5rem;
-    /*margin: 20rem 0 0 20rem;*/
     opacity: 90%;
 }
+
 
 .is-sparta {
     color: limegreen !important;
