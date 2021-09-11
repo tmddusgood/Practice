@@ -42,6 +42,8 @@ public class AuthServiceTest {
         assertTrue(thrown.getMessage().contains("password"));
     }
 
+    /** assertAll(Executable) 은 일반 assert와 달리 앞선 테스트가 실패해도 남은 모든 테스트를 실행한다
+     */
     @Test
     void assertAllTest() {
         assertAll(
