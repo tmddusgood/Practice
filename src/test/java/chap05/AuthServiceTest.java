@@ -1,5 +1,6 @@
 package chap05;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
@@ -19,14 +20,25 @@ public class AuthServiceTest {
         // assertTrue(assertEquals(dateTime1, dateTime2));
     }
 
+    @Disabled
+    @Test
+    void failMethod() {
+        try {
+            AuthService authService = new AuthService();
+            authService.authenticate(null, null);
+            fail();
+        } catch(IllegalArgumentException e) {
+        }
+    }
+
     @Test
     void assertThrowTest() {
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
                 () -> {
                     AuthService authService = new AuthService();
-                    authService.authenticate(null, null);
+                    authService.authenticate("tmddusgood", null);
                 }
         );
-        assertTrue(thrown.getMessage().contains("id"));
+        assertTrue(thrown.getMessage().contains("password"));
     }
 }
