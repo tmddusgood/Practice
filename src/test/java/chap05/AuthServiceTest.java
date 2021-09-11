@@ -15,6 +15,10 @@ public class AuthServiceTest {
 
         assertSame(dateTime1, dateTime2); // 같은 오브젝트인지 검증
         assertEquals(dateTime1, dateTime2); // 같은 값인지 검증
+
+        // 위의 테스트 값들은 boolean 값이 아니다!
+        // assertTrue(assertSame(dateTime1, dateTime2));
+        // assertTrue(assertEquals(dateTime1, dateTime2));
     }
 
     @Test
