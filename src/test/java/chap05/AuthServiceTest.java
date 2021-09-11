@@ -1,11 +1,9 @@
 package chap05;
 
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 public class AuthServiceTest {
 
     @Test
@@ -16,7 +14,7 @@ public class AuthServiceTest {
         assertSame(dateTime1, dateTime2); // 같은 오브젝트인지 검증
         assertEquals(dateTime1, dateTime2); // 같은 값인지 검증
 
-        // 위의 테스트 값들은 boolean 값이 아니다!
+        // 위의 테스트 값들은 boolean 값이 아니다! (너무나 당연하게도)
         // assertTrue(assertSame(dateTime1, dateTime2));
         // assertTrue(assertEquals(dateTime1, dateTime2));
     }
