@@ -38,4 +38,13 @@ public class DisplayNameTest {
                     authService.authenticate(null, null);
                 });
     }
+
+    @Test
+    void assertAllTest() {
+        assertAll(
+                () -> assertEquals(3, 5/ 2),
+                () -> assertEquals(4, 2 * 2),
+                () -> assertEquals(6, 11 / 2)
+        );
+    }
 }
