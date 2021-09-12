@@ -28,4 +28,14 @@ public class DisplayNameTest {
         } catch(IllegalArgumentException e) {
         }
     }
+
+    @DisplayName("익셉션 발생 여부 테스트")
+    @Test
+    void assertThrowsTest() {
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    AuthService authService = new AuthService();
+                    authService.authenticate(null, null);
+                });
+    }
 }
