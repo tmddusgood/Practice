@@ -17,4 +17,15 @@ public class DisplayNameTest {
         LocalDate dateTime2 = LocalDate.now();
         assertEquals(dateTime1, dateTime2);
     }
+
+    @Disabled
+    @Test
+    void failMethod() {
+        try {
+            AuthService authService = new AuthService();
+            authService.authenticate(null, null);
+            fail();
+        } catch(IllegalArgumentException e) {
+        }
+    }
 }
