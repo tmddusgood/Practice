@@ -17,6 +17,11 @@ public class LifecycleTest {
         System.out.println("new LifecycleTest");
     }
 
+    @BeforeAll
+    static void testSetUp() {
+        System.out.println("setUp all test");
+    }
+
     @AfterEach
     void tearDown(){
         System.out.println("tearDown");
