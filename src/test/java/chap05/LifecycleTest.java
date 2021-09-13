@@ -36,4 +36,9 @@ public class LifecycleTest {
     void b(){
         System.out.println("B");
     }
+
+    @AfterAll
+    static void testTearDown() {
+        System.out.println("after all test");
+    }
 }
