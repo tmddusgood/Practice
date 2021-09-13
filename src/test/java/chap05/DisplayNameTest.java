@@ -39,6 +39,7 @@ public class DisplayNameTest {
                 });
     }
 
+    @Disabled
     @Test
     void assertAllTest() {
         assertAll(

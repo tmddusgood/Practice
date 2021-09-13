@@ -2,10 +2,12 @@ package chap02;
 
 import chap02.PasswordStrength;
 import chap02.PasswordStrengthMeter;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 public class PasswordStrengthMeterTest {
 
     private PasswordStrengthMeter meter = new PasswordStrengthMeter();

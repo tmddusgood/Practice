@@ -12,7 +12,7 @@ public class AuthServiceTest {
         LocalDate dateTime1 = LocalDate.now();
         LocalDate dateTime2 = LocalDate.now();
 
-        assertSame(dateTime1, dateTime2); // 같은 오브젝트인지 검증
+        // assertSame(dateTime1, dateTime2); // 같은 오브젝트인지 검증
         assertEquals(dateTime1, dateTime2); // 같은 값인지 검증
 
         // 위의 테스트 값들은 boolean 값이 아니다! (너무나 당연하게도)
@@ -44,6 +44,7 @@ public class AuthServiceTest {
 
     /** assertAll(Executable) 은 일반 assert와 달리 앞선 테스트가 실패해도 남은 모든 테스트를 실행한다
      */
+    @Disabled
     @Test
     void assertAllTest() {
         assertAll(
