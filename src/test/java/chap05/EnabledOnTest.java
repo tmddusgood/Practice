@@ -7,7 +7,6 @@ import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,6 +28,4 @@ public class EnabledOnTest {
     void testOnJre() {
         assertEquals(LocalDate.of(1919, 3, 1), LocalDate.of(2019, 3, 1).minusYears(100));
     }
-
-
 }
