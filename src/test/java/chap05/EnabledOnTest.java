@@ -18,4 +18,17 @@ public class EnabledOnTest {
         assertEquals(2, 1 + 1);
     }
 
+    @Test
+    @EnabledOnOs({OS.MAC, OS.LINUX})
+    void testOnMac() {
+        assertEquals(2, 1 + 1);
+    }
+
+    @Test
+    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11})
+    void testOnJre() {
+        assertEquals(LocalDate.of(1919, 3, 1), LocalDate.of(2019, 3, 1).minusYears(100));
+    }
+
+
 }
