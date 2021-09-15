@@ -1,14 +1,16 @@
 package chap06;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BaseballGame {
-    private String[] setNumStrArray = {};
+    private List<String> setNumStrArray;
     private int strikes = 0;
     private int balls = 0;
 
     public BaseballGame(String nums) {
-        setNumStrArray = nums.split("");
+        setNumStrArray = Arrays.asList(nums.split(""));
     }
 
     public Score guess(String nums){
@@ -18,7 +20,7 @@ public class BaseballGame {
 
     public void countStrike(String[] givenNumStrArray){
         for (String givenEach : givenNumStrArray){
-            if(Arrays.stream(setNumStrArray).anyMatch(setEach -> setEach.equals(givenEach))) strikes ++;
+            if(setNumStrArray.contains(givenEach)) strikes ++;
             else balls ++;
         }
     }
