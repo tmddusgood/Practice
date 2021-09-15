@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+/** BeforeAll AfterAll은 static에 사용되기 때문에, 클래스 변수에 대한 접근이 있다면 마찬가지로 그 놈도 static..
+ *
+ */
 @DisplayName("야구 게임에 대한 테스트 메서드")
 public class BaseballGameTest {
     public static BaseballGame game;
