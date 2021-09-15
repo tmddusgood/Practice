@@ -11,6 +11,7 @@ public class BaseballGameTest {
         BaseballGame game = new BaseballGame("456");
     }
 
+
     @Test
     void exactMatch(){
         // 정답이 456인 상황
