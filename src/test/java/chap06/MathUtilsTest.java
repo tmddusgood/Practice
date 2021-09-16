@@ -40,5 +40,14 @@ public class MathUtilsTest {
     }
 
 
+    private void givenNoFile(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            boolean deleted = file.delete();
+            if (!deleted)
+                throw new RuntimeException("fail givenNoFile: " + path);
+        }
+    }
+
 
 }
