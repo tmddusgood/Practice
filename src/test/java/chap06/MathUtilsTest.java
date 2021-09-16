@@ -19,4 +19,26 @@ public class MathUtilsTest {
         long sum = MathUtils.sum(dataFile);
         assertEquals(10L, sum);
     }
+    @Test
+    void dataFileSumTest2() {
+        givenDataFile("target/datafile.txt", "1", "2", "3", "4");
+        File dataFile = new File("src/test/resources/datafile.txt");
+        long sum = MathUtils.sum(dataFile);
+        assertEquals(10L, sum);
+    }
+
+    private void givenDataFile(String path, String... lines) {
+        try {
+            Path dataPath = Paths.get(path);
+            if (Files.exists(dataPath)) {
+                Files.delete(dataPath);
+            }
+            Files.write(dataPath, Arrays.asList(lines));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 }
