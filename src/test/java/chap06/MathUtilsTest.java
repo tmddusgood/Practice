@@ -49,5 +49,15 @@ public class MathUtilsTest {
         }
     }
 
+    @Test
+    void noDataFile_Then_Exception() {
+        givenNoFile("badpath.txt");
+
+        File dataFile = new File("badpath.txt");
+        assertThrows(IllegalArgumentException.class,
+                () -> MathUtils.sum(dataFile)
+        );
+    }
+
 
 }
