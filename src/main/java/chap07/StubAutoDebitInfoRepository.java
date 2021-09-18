@@ -1,4 +1,4 @@
-package autodebit;
+package chap07;
 
 public class StubAutoDebitInfoRepository implements AutoDebitInfoRepository {
     @Override
