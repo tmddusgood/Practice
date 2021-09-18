@@ -1,4 +1,4 @@
-package autodebit;
+package chap07;
 
 public class RegisterResult {
     private boolean success;
