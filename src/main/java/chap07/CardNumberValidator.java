@@ -1,4 +1,4 @@
-package autodebit;
+package chap07;
 
 import java.io.IOException;
 import java.net.URI;
